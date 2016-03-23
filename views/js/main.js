@@ -500,18 +500,31 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+
+// Three problems were identified :
+// (1) Animation was based on a loop and not using requestAnimationFrame
+// (2) .scrollTop was used in the loop, forcing reflow
+// (3) .left was used in the loop, also forcing reflow
+
 function updatePositions() {
+
   frame++;
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    // This is the problem. .left forces to recalculate the whole
-    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    var tr = items[i].basicLeft + 100 * phase;
-    items[i].style.transform = "translate(" + tr + "px, 0px)";
+
+  function animate() {
+
+    var scrollY = window.scrollY;
+
+    for (var i = 0; i < items.length; i++) {
+     var phase = Math.sin((scrollY / 1250) + (i % 5));
+     var tr = items[i].basicLeft + 100 * phase;
+     items[i].style.transform = "translate(" + tr + "px, 0px)";
+     }
   }
+
+  requestAnimationFrame(animate);
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
