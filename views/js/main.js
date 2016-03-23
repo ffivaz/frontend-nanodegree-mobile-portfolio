@@ -506,6 +506,10 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // (2) .scrollTop was used in the loop, forcing reflow
 // (3) .left was used in the loop, also forcing reflow
 
+// Ideas taken from http://www.html5rocks.com/en/tutorials/speed/animations/#an-example
+
+// TODO : remove the scroll event listener ?
+
 function updatePositions() {
 
   frame++;
