@@ -508,7 +508,8 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Ideas taken from http://www.html5rocks.com/en/tutorials/speed/animations/#an-example
 
-// TODO : remove the scroll event listener ?
+// TODO: remove the scroll event listener ?
+// TODO: there are still some differences between my pizzas and the original pizzas
 
 function updatePositions() {
 
