@@ -506,7 +506,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // (2) .scrollTop was used in the loop, forcing reflow
 // (3) .left was used in the loop, also forcing reflow
 
-// Ideas taken from http://www.html5rocks.com/en/tutorials/speed/animations/#an-example
+// Ideas taken from http://www.html5rocks.com/en/tutorials/speed/animations/
 
 // TODO: remove the scroll event listener ?
 // TODO: there are still some differences between my pizzas and the original pizzas
@@ -525,14 +525,15 @@ function updatePositions() {
     for (var i = 0; i < items.length; i++) {
      var phase = Math.sin((scrollY / 1250) + (i % 5));
      var tr = items[i].basicLeft + 100 * phase;
-     items[i].style.transform = "translate(" + tr + "px, 0px)";
+     //items[i].style.transform = "translate(" + tr + "px, 0px)";
+     items[i].style.left = tr + 'px';
      }
   }
 
   requestAnimationFrame(animate);
 
-  // User Timing API to the rescue again. Seriously, it's worth learning.
-  // Super easy to create custom metrics.
+  //User Timing API to the rescue again. Seriously, it's worth learning.
+  //Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
