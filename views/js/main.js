@@ -422,8 +422,6 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 
   // Iterates through pizza elements on the page and changes their widths
-  // To accelerate the size change, I removed the size calculation from the loop.
-  // But it could be simplified... still.
   function changePizzaSizes(size) {
 
     function sizeSwitcher (size) {
@@ -443,7 +441,6 @@ var resizePizzas = function(size) {
     for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = dx;
     }
-    console.log(dx);
   }
 
   changePizzaSizes(size);
