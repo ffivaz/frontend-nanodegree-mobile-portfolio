@@ -437,6 +437,8 @@ var resizePizzas = function (size) {
             }
         }
 
+        // Problem here was a performance
+
         var dx = sizeSwitcher(size);
         for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
             document.querySelectorAll(".randomPizzaContainer")[i].style.width = dx;
@@ -485,12 +487,14 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 
-// Three problems were identified :
+// Two main problems were identified :
 // (1) Animation was based on a loop and not using requestAnimationFrame
 // (2) .scrollTop was used in the loop, forcing reflow
-// (3) .left was used in the loop, also forcing reflow
 
-// Ideas taken from http://www.html5rocks.com/en/tutorials/speed/animations/
+// will-change attribute was added to the CSS class (.mover) to let the browser know
+// that this element is changing (style.left)
+
+// Some ideas were borrowed from http://www.html5rocks.com/en/tutorials/speed/animations/
 
 // TODO: remove the scroll event listener ?
 
@@ -511,7 +515,9 @@ function updatePositions() {
             items[i].style.left = tr + 'px';
             // Or it could also be replaced by
             // items[i].style.transform = "translate(" + tr + "px, 0px)";
-            // The were some battles around the webs about which is faster : style.left or CSS translate.
+            // The are some battles around the webs about which is faster : style.left or CSS translate.
+            // I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change
+            // the will-change CSS attribute for class .mover to transform.
         }
     }
 
