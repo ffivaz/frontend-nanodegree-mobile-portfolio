@@ -10,10 +10,10 @@ For the pizzas, got to http://fabienfivaz.ch/frontend-nanodegree-mobile-portfoli
 To speed up the index.html main portofolio page, different changes have been carried, listed above. The page reaches a mobile PageSpeed of 96 and a desktop PageSpeed of 97.
 
 ### Inlining and minifying CSS
-Since there are only few CSS commands, they can be inlined to boost performance. It has also been minified http://cssminifier.com
+Since there are only few CSS commands, they can be inlined to boost performance. It has also been minified with http://cssminifier.com.
 
 ### Asynchronous scripts
-According to Google (https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet), the Analytics script can be loaded asynchronously. 
+According to Google (https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet), the Analytics script can be loaded asynchronously.
 
 ### print.css command at the end of html
 For performance reasons, the print.css file can be linked at the end of the file. But there are some discussions around the Internet if this is HTML5 compliant. See for instance : http://stackoverflow.com/questions/21058207/why-does-code-after-html-tag-get-moved-to-before-body-is-there-a-performa. I leaved it here, but it could have been linked before the body closing tag.
@@ -42,17 +42,17 @@ pizza.png was optimized/compressed using http://tinypng.com.
 ### Animation
 Two main problems were identified :
  - Animation was based on a loop and not using requestAnimationFrame
- - .scrollTop was used in the loop, forcing reflow
+ - ```.scrollTop``` was used in the loop, forcing reflow
 
 Some ideas were borrowed from http://www.html5rocks.com/en/tutorials/speed/animations/
 
-will-change attribute was added to the CSS class (.mover) to let the browser know that this element is changing (style.left)
+```will-change``` attribute was added to the CSS class (.mover) to let the browser know that this element is changing (```style.left```)
 
 #### RequestAnimationFrame
-To smooth the animation, the original loop that moved the pizzas in the background was replaced with RequestAnimationFrame. This brings a lot of smoothness to the animation, removes jank and reaches constantly 60 FPS using the FPS Counter/HUD Display.
+To smooth the animation, the original loop that moved the pizzas in the background was replaced with ```RequestAnimationFrame```. This brings a lot of smoothness to the animation, removes jank and reaches constantly 60 FPS using the FPS Counter/HUD Display.
 
 #### Layout trashing
-In the animation, the repeated (in the for loop) call to .scrollTop forces the browser to redraw the entire layout in each loop, which trashes the layout, basically. By using .ScrollY and moving the functions out of the loop, the number of redraws in far lower, and better for the fluidity.
+In the animation, the repeated (in the for loop) call to ```.scrollTop``` forces the browser to redraw the entire layout in each loop, which trashes the layout, basically. By using .ScrollY and moving the functions out of the loop, the number of redraws in far lower, and better for the fluidity.
 
 Further down, ```.style.left``` could also be replaced by:
 
@@ -60,7 +60,7 @@ Further down, ```.style.left``` could also be replaced by:
 items[i].style.transform = "translate(" + tr + "px, 0px)"; 
 ```
 
-The are some battles around the webs about which is faster : style.left or CSS translate. I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change the will-change CSS attribute for class .mover to transform.
+The are some battles around the webs about which is faster : style.left or CSS translate. I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change the ```will-change``` CSS attribute for class .mover to transform.
  
 ### Resizing the pizzas
-Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (style.width), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (offsetWidth) to determine dx.
+Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (```style.width```), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (```offsetWidth```) to determine dx.
