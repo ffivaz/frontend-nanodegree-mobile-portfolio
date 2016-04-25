@@ -13,14 +13,28 @@ According to Google (https://developers.google.com/analytics/devguides/collectio
 For performance reasons, the print.css file can be linked at the end of the file. But there are some discussions around the Internet if this is HTML5 compliant. See for instance : http://stackoverflow.com/questions/21058207/why-does-code-after-html-tag-get-moved-to-before-body-is-there-a-performa. I leaved it here, but it could have been linked before the body closing tag.
 
 ### Image compression
-Images were compressed to smaller sizes using jpegtran. Command:
+Image (pizzeria.jpg) was compressed to smaller sizes using jpegtran. Command:
  
 ```
 jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
 ```
 
-####Part 2: Optimize Frames per Second in pizza.html
+## Part 2: Optimize Frames per Second in pizza.html
 
+### Image compression
+As above, image (pizzeria.jpg) was compressed to smaller sizes using jpegtran. Command:
+ 
+```
+jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
+```
+
+pizza.png was optimized/compressed using http://tinypng.com.
+ 
+### RequestAnimationFrame
+To smooth the animation, the original loop that moved the pizzas in the background was replaced with RequestAnimationFrame. This brings a lot of smoothness to the animation, removes jank and reaches constantly 60 FPS using the FPS Counter/HUD Display.
+ 
+### Resizing the pizzas
+Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (style.width), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (offsetWidth) to determine dx.
 
 To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
 

@@ -523,7 +523,7 @@ function updatePositions() {
             // I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change
             // the will-change CSS attribute for class .mover to transform.
         }
-        
+
         //User Timing API to the rescue again. Seriously, it's worth learning.
         //Super easy to create custom metrics.
         window.performance.mark("mark_end_frame");
@@ -532,9 +532,9 @@ function updatePositions() {
             var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
             logAverageFrame(timesToUpdatePosition);
         }
-    }
 
-    requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
+    }
 }
 
 // runs updatePositions on scroll
