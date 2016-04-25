@@ -466,8 +466,7 @@ for (var i = 2; i < 100; i++) {
     pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
-// User Timing API again. These measurements tell you how long it took to generate the initial pizza
-
+// User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
 window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
 var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
@@ -525,13 +524,14 @@ function updatePositions() {
     var items = document.querySelectorAll('.mover');
     requestAnimationFrame(animate);
 
-    // User Timing API to the rescue again. Seriously, it's worth learning.
+    //User Timing API to the rescue again. Seriously, it's worth learning.
+    //Super easy to create custom metrics.
     window.performance.mark("mark_end_frame");
     window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
     if (frame % 10 === 0) {
         var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+        logAverageFrame(timesToUpdatePosition);
     }
-    logAverageFrame(timesToUpdatePosition);
 }
 
 // runs updatePositions on scroll
