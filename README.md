@@ -30,8 +30,20 @@ jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
 
 pizza.png was optimized/compressed using http://tinypng.com.
  
-### RequestAnimationFrame
+### Animation
+Two main problems were identified :
+ * Animation was based on a loop and not using requestAnimationFrame
+ * .scrollTop was used in the loop, forcing reflow
+
+Some ideas were borrowed from http://www.html5rocks.com/en/tutorials/speed/animations/
+
+will-change attribute was added to the CSS class (.mover) to let the browser know that this element is changing (style.left)
+
+#### RequestAnimationFrame
 To smooth the animation, the original loop that moved the pizzas in the background was replaced with RequestAnimationFrame. This brings a lot of smoothness to the animation, removes jank and reaches constantly 60 FPS using the FPS Counter/HUD Display.
+
+#### Layout trashing
+Or it could also be replaced by items[i].style.transform = "translate(" + tr + "px, 0px)"; The are some battles around the webs about which is faster : style.left or CSS translate. I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change the will-change CSS attribute for class .mover to transform.
  
 ### Resizing the pizzas
 Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (style.width), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (offsetWidth) to determine dx.
