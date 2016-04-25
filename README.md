@@ -1,7 +1,7 @@
 ## Readme file : what has been done ?
 
 ## Part 1: Optimize PageSpeed Insights score for index.html
-To speed up the index.html main portofolio page. Different changes have been carried, listed above. The page reaches a mobile PageSpeed of 96 and a desktop PageSpeed of 97.
+To speed up the index.html main portofolio page, different changes have been carried, listed above. The page reaches a mobile PageSpeed of 96 and a desktop PageSpeed of 97.
 
 ### Inlining and minifying CSS
 Since there are only few CSS commands, they can be inlined to boost performance. It has also been minified http://cssminifier.com
@@ -19,11 +19,8 @@ Images were compressed to smaller sizes using jpegtran. Command:
 jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
 ```
 
-## Website Performance Optimization portfolio project
-
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
-
 ####Part 2: Optimize Frames per Second in pizza.html
+
 
 To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
 
