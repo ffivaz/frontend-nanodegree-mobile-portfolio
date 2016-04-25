@@ -54,7 +54,7 @@ To smooth the animation, the original loop that moved the pizzas in the backgrou
 #### Layout trashing
 In the animation, the repeated (in the for loop) call to .scrollTop forces the browser to redraw the entire layout in each loop, which trashes the layout, basically. By using .ScrollY and moving the functions out of the loop, the number of redraws in far lower, and better for the fluidity.
 
-BTW, .style.left could also be replaced by:
+Further down, ```.style.left``` could also be replaced by:
 
 ```
 items[i].style.transform = "translate(" + tr + "px, 0px)"; 
