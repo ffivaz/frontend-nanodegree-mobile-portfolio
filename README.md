@@ -2,14 +2,21 @@
 
 ## Index.html pagespeeding
 
-### Inlining CSS
+### Inlining and minifying CSS
+Since there are only few CSS commands, they can be inlined to boost performance. It has also been minified http://cssminifier.com
 
 ### Asynchronous scripts
+According to Google (https://developers.google.com/analytics/devguides/collection/analyticsjs/#alternative_async_tracking_snippet), the Analytics script can be loaded asynchronously. 
 
-### 
+### print.css command at the end of html
+For performance reasons, the print.css file can be linked at the end of the file. But there are some discussions around the Internet if this is HTML5 compliant. See for instance : http://stackoverflow.com/questions/21058207/why-does-code-after-html-tag-get-moved-to-before-body-is-there-a-performa. I leaved it here, but it could have been linked before the body closing tag.
 
-First, images were compressed to smaller sizes (https://tinypng.com/)
-
+### Image compression
+Images were compressed to smaller sizes using jpegtran. Command:
+ 
+```
+jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
+```
 
 ## Website Performance Optimization portfolio project
 
