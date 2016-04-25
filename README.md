@@ -19,6 +19,9 @@ Image (pizzeria.jpg) was compressed to smaller sizes using jpegtran. Command:
 jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
 ```
 
+### Web Font Loader 
+Using the webfontloader asynchronously boosts the load times, because fonts can now be loaded, and applied, asynchronously to the page. There are discussions around the Internet if this is the right way to do, since the user sees the page with the wrong font, before seeing the right one. See this discussions for instance: https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
+
 ## Part 2: Optimize Frames per Second in pizza.html
 
 ### Image compression
@@ -47,10 +50,6 @@ Or it could also be replaced by items[i].style.transform = "translate(" + tr + "
  
 ### Resizing the pizzas
 Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (style.width), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (offsetWidth) to determine dx.
-
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
-
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
