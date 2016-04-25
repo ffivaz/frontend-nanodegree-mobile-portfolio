@@ -1,3 +1,5 @@
+
+
 ## Readme file : what has been done ?
 
 ## Part 1: Optimize PageSpeed Insights score for index.html
@@ -35,8 +37,8 @@ pizza.png was optimized/compressed using http://tinypng.com.
  
 ### Animation
 Two main problems were identified :
- * Animation was based on a loop and not using requestAnimationFrame
- * .scrollTop was used in the loop, forcing reflow
+ - Animation was based on a loop and not using requestAnimationFrame
+ - .scrollTop was used in the loop, forcing reflow
 
 Some ideas were borrowed from http://www.html5rocks.com/en/tutorials/speed/animations/
 
