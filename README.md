@@ -1,6 +1,7 @@
 ## Readme file : what has been done ?
 
 ## Index.html pagespeeding
+To speed up the index.html main portofolio page. Different changes have been carried, listed above. The page reaches a mobile PageSpeed of 96 and a desktop PageSpeed of 97.
 
 ### Inlining and minifying CSS
 Since there are only few CSS commands, they can be inlined to boost performance. It has also been minified http://cssminifier.com
