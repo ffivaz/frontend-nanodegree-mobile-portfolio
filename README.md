@@ -52,7 +52,15 @@ will-change attribute was added to the CSS class (.mover) to let the browser kno
 To smooth the animation, the original loop that moved the pizzas in the background was replaced with RequestAnimationFrame. This brings a lot of smoothness to the animation, removes jank and reaches constantly 60 FPS using the FPS Counter/HUD Display.
 
 #### Layout trashing
-The Or it could also be replaced by items[i].style.transform = "translate(" + tr + "px, 0px)"; The are some battles around the webs about which is faster : style.left or CSS translate. I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change the will-change CSS attribute for class .mover to transform.
+In the animation, the repeated (in the for loop) call to .scrollTop forces the browser to redraw the entire layout in each loop, which trashes the layout, basically. By using .ScrollY and moving the functions out of the loop, the number of redraws in far lower, and better for the fluidity.
+
+BTW, .style.left could also be replaced by:
+
+```
+items[i].style.transform = "translate(" + tr + "px, 0px)"; 
+```
+
+The are some battles around the webs about which is faster : style.left or CSS translate. I didn't find a clear, settled, answer. BTW, if we are using transform, we have to change the will-change CSS attribute for class .mover to transform.
  
 ### Resizing the pizzas
 Resizing the pizzas now take 3.97 ms (at least on my older laptop). The problem here was Forced Synchronous Layout: the layout is called (offsetWidth) before the style is updated (style.width), and this is done repeatedly inside the loop. I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings avoids the repeated layout calling (offsetWidth) to determine dx.
