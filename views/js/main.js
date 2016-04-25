@@ -399,6 +399,7 @@ var pizzaElementGenerator = function (i) {
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+
 var resizePizzas = function (size) {
     window.performance.mark("mark_start_resize");   // User Timing API function
 
@@ -437,7 +438,10 @@ var resizePizzas = function (size) {
             }
         }
 
-        // Problem here was a performance
+        // Problem here is Forced Synchronous Layout: the layout is called (offsetWidth)
+        // before the style is updated (style.width), and this is done repeatedly inside the loop.
+        // I also changed the way the width of the randomPizzaContainer class is changed : using fixed settings
+        // avoids the repeated layout calling (offsetWidth) to determine dx.
 
         var dx = sizeSwitcher(size);
         for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {

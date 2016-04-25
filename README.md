@@ -1,5 +1,13 @@
 ## Readme file : what has been done ?
 
+## Index.html pagespeeding
+
+### Inlining CSS
+
+### Asynchronous scripts
+
+### 
+
 First, images were compressed to smaller sizes (https://tinypng.com/)
 
 
