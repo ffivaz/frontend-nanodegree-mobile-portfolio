@@ -17,7 +17,6 @@
 
  The modification were done to reach a steady, jank-free, 60 fps for background pizzas and less than 5ms for
  the slider changing pizza size.
-
  */
 
 // As you may have realized, this website randomly generates pizzas.
