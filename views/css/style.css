@@ -33,7 +33,14 @@ form {
     position: fixed;
     width: 256px;
     z-index: -1;
-    will-change: left;
+    will-change: transform;
+    /*
+        The next two CSS commands can make some improvements to the performance to the background moving pizzas.
+        See https://css-tricks.com/almanac/properties/b/backface-visibility/ for instance.
+    */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .randomPizzaContainer {

@@ -18,17 +18,23 @@ According to Google (https://developers.google.com/analytics/devguides/collectio
 ### print.css command at the end of html
 For performance reasons, the print.css file can be linked at the end of the file. But there are some discussions around the Internet if this is HTML5 compliant. See for instance : http://stackoverflow.com/questions/21058207/why-does-code-after-html-tag-get-moved-to-before-body-is-there-a-performa. I leaved it here, but it could have been linked before the body closing tag.
 
-### Image compression
-Image (pizzeria.jpg) was compressed to smaller sizes using jpegtran. Command:
- 
-```
-jpegtran -copy none -optimize -progressive pizzeria.jpg > pizzeria_optimized.jpg
-```
+### Image size
+pizzeria.jpg has been reduced to 100px width.
 
 ### Web Font Loader 
 Using the webfontloader asynchronously boosts the load times, because fonts can now be loaded, and applied, asynchronously to the page. There are discussions around the Internet if this is the right way to do, since the user sees the page with the wrong font, before seeing the right one. See this discussions for instance: https://css-tricks.com/loading-web-fonts-with-the-web-font-loader/
 
 ## Part 2: Optimize Frames per Second in pizza.html
+
+### Code
+
+```"Use strict"``` has been added to force a cleaner and more secure code.
+
+```document.querySelector("#...")``` has been replaced by ```document.getElementId("...")```. ```document.querySelectorAll("#...")``` has been replaced by ```document.getElementByTagName("...")```. They are meant to be faster (but lack some functionality). See http://ryanmorr.com/abstract-away-the-performance-faults-of-queryselectorall/ for example.
+
+Many ```document.getElementByTagName("...")``` or ```document.getElementId("...")``` are called inside loops. In this case, the DOM is accessed each time, which slows the process. Whenever possible, the calls have been moved outside of the loops, DOM is now accessed once.
+
+Variable declarations have been moved outside of loops.
 
 ### Image compression
 As above, image (pizzeria.jpg) was compressed to smaller sizes using jpegtran. Command:
